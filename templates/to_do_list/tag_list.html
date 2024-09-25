@@ -22,7 +22,7 @@
             <a class="btn btn-secondary" href="{% url 'to_do_list:tag-update' pk=tag.pk %}">Update</a>
           </td>
           <td>
-            <a class="btn btn-secondary" href="{% url 'to_do_list:tag-update' pk=tag.pk %}">Delete</a>
+            <a class="btn btn-secondary" href="{% url 'to_do_list:tag-delete' pk=tag.pk %}">Delete</a>
           </td>
         </tr>
       {% endfor %}
