@@ -3,24 +3,32 @@
 {% block content %}
   <h1>
     TODO list
+    <a class="float-right btn btn-primary" href="{% url 'to_do_list:task-create' %}">Add Task</a>
   </h1>
+
 
   {% for task in task_list %}
     <h4>
       {{ task.content }}
       {% if task.done %}
-        Done
+        <strong style="color: #00ca00">Done</strong>
+        <a class="float-right btn btn-secondary" href="{% url 'to_do_list:task-toggle-done' pk=task.pk %}">Undo</a>
       {% else %}
-        Not Done
+        <strong style="color: #d10000">Not done</strong>
+        <a class="float-right btn btn-primary" href="{% url 'to_do_list:task-toggle-done' pk=task.pk %}">Complete</a>
       {% endif %}
     </h4>
-    <p>
+    <h6>
       Created: {{ task.created }}
       {% if task.deadline %}
-      	Deadline: {{ task.deadline }}
-      {% endif %} 
-    </p>
-    <p>Tags: {{ task.tags.all|join:" " }}</p>
+        <span style="color: #950000">Deadline: {{ task.deadline }}</span>
+      {% endif %}
+    </h6>
+    <h4>
+      <strong style="color: #868c91">Tags: {{ task.tags.all|join:" " }}</strong>
+      <a href="{% url 'to_do_list:task-update' pk=task.pk %}">Update</a>
+      <a href="{% url 'to_do_list:task-delete' pk=task.pk %}">Delete</a>
+    </h4>
     <hr>
   {% endfor %}
 {% endblock %}
